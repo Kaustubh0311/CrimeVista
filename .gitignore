@@ -1,0 +1,21 @@
+# Python virtual environment
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Environment variables and passwords
+.env
+
+# React dependencies
+node_modules/
+
+# VS Code settings
+.vscode/
+
+# React production build
+dist/
+
+# Log files
+*.log
