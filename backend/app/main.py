@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.app.database.connection import test_database_connection
+from backend.app.routes.crimes import router as crime_router
 
 
 app = FastAPI(
@@ -13,13 +14,22 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
+
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173"
     ],
+
     allow_credentials=True,
+
     allow_methods=["*"],
-    allow_headers=["*"],
+
+    allow_headers=["*"]
+)
+
+
+app.include_router(
+    crime_router
 )
 
 
@@ -38,5 +48,9 @@ def health_check():
 
     return {
         "backend": "healthy",
-        "database": "connected" if database_status else "not connected"
+
+        "database":
+            "connected"
+            if database_status
+            else "not connected"
     }
