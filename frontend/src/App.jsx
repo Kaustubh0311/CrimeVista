@@ -1,130 +1,113 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import LandingPage from "./LandingPage";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
 
 
 function App() {
 
-    const [crimes, setCrimes] = useState([]);
+    const [token, setToken] = useState(
+        localStorage.getItem(
+            "access_token"
+        )
+    );
 
-    const [loading, setLoading] = useState(true);
+
+    const [showLanding, setShowLanding] =
+        useState(true);
 
 
-    useEffect(() => {
+    const handleLogin = (newToken) => {
 
-        fetch("http://127.0.0.1:8000/crimes/")
+        setToken(newToken);
 
-            .then(response => response.json())
+        setShowLanding(false);
 
-            .then(data => {
+    };
 
-                setCrimes(data.data);
 
-                setLoading(false);
+    const handleLogout = () => {
 
-            })
+        localStorage.removeItem(
+            "access_token"
+        );
 
-            .catch(error => {
+        setToken(null);
 
-                console.error(
-                    "Error loading crime data:",
-                    error
-                );
+        setShowLanding(true);
 
-                setLoading(false);
+    };
 
-            });
 
-    }, []);
+    /*
+     * =====================================
+     * LANDING PAGE
+     * =====================================
+     */
 
+    if (!token && showLanding) {
+
+        return (
+
+            <LandingPage
+
+                onLogin={() => {
+
+                    setShowLanding(false);
+
+                }}
+
+                onRegister={() => {
+
+                    setShowLanding(false);
+
+                }}
+
+            />
+
+        );
+
+    }
+
+
+    /*
+     * =====================================
+     * LOGIN PAGE
+     * =====================================
+     */
+
+    if (!token) {
+
+        return (
+
+            <Login
+                onLogin={handleLogin}
+            />
+
+        );
+
+    }
+
+
+    /*
+     * =====================================
+     * DASHBOARD
+     * =====================================
+     */
 
     return (
 
-        <div>
+        <Dashboard
 
-            <h1>CrimeVista</h1>
+            token={token}
 
-            <h2>Crime Records</h2>
+            onLogout={handleLogout}
 
-
-            {loading ? (
-
-                <p>
-                    Loading crime data...
-                </p>
-
-            ) : (
-
-                <div>
-
-                    <p>
-                        Records displayed:
-                        {" "}
-                        {crimes.length}
-                    </p>
-
-
-                    <table border="1">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>ID</th>
-
-                                <th>Crime Type</th>
-
-                                <th>Date</th>
-
-                                <th>Location</th>
-
-                                <th>City</th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody>
-
-                            {crimes.map(
-                                crime => (
-
-                                <tr key={crime.id}>
-
-                                    <td>
-                                        {crime.id}
-                                    </td>
-
-                                    <td>
-                                        {crime.crime_type}
-                                    </td>
-
-                                    <td>
-                                        {crime.crime_date}
-                                    </td>
-
-                                    <td>
-                                        {crime.location}
-                                    </td>
-
-                                    <td>
-                                        {crime.city}
-                                    </td>
-
-                                </tr>
-
-                            ))}
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            )}
-
-        </div>
+        />
 
     );
+
 }
 
 

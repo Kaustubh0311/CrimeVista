@@ -1,0 +1,6 @@
+crime_type,location,latitude,longitude,crime_date,description
+Theft,Shegaon,20.793,76.693,2026-01-10,Mobile theft reported
+Robbery,Akola,20.700,77.000,2026-01-12,Street robbery
+Assault,Buldhana,20.529,76.184,2026-01-15,Physical assault
+Burglary,Washim,20.111,77.133,2026-01-18,House burglary
+Theft,Akola,20.700,77.000,2026-01-20,Vehicle related theft

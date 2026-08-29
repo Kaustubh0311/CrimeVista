@@ -2,6 +2,7 @@ from backend.app.database.connection import engine
 from backend.app.database.base import Base
 
 from backend.app.models.crime import CrimeRecord
+from backend.app.models.user import User
 
 
 def create_tables():

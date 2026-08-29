@@ -3,7 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.app.database.connection import test_database_connection
 from backend.app.routes.crimes import router as crime_router
-
+from backend.app.routes.auth import router as auth_router
+from backend.app.routes.admin import router as admin_router
+from backend.app.routes.crime_upload import (
+    router as crime_upload_router
+)
 
 app = FastAPI(
     title="CrimeVista API",
@@ -27,10 +31,20 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+app.include_router(
+    admin_router
+)
 
 app.include_router(
     crime_router
 )
+app.include_router(
+    auth_router
+)
+app.include_router(
+    crime_upload_router
+)
+
 
 
 @app.get("/")
