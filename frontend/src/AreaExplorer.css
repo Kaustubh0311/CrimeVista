@@ -1,0 +1,454 @@
+.area-explorer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+
+/* =====================================================
+   AREA SELECTOR
+===================================================== */
+
+.area-selector-card {
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+
+.area-selector-card h2 {
+    margin: 0 0 6px;
+
+    font-size: 22px;
+}
+
+
+.area-selector-card p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+
+.area-selector-card select {
+    min-width: 250px;
+
+    padding: 12px 15px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    background: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+.area-selector-card select:focus {
+    border-color: #111827;
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.area-stat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+.area-stat-card {
+    background: white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 21px;
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.05);
+}
+
+
+.area-stat-card span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    margin-bottom: 9px;
+}
+
+
+.area-stat-card strong {
+    display: block;
+
+    font-size: 28px;
+
+    margin-bottom: 6px;
+}
+
+
+.area-stat-card small {
+    color: #9ca3af;
+}
+
+
+.area-stat-card .crime-name {
+    font-size: 18px;
+
+    line-height: 1.3;
+}
+
+
+/* =====================================================
+   ACTIVITY BADGE
+===================================================== */
+
+.activity-badge {
+    width: fit-content;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 14px !important;
+
+    letter-spacing: 0.5px;
+}
+
+
+.activity-badge.low {
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+
+.activity-badge.medium {
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+
+.activity-badge.high {
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.area-location-card {
+    background: white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.area-location-card h3 {
+    margin: 0 0 5px;
+
+    font-size: 21px;
+}
+
+
+.area-location-card p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+
+.coordinates {
+    display: flex;
+
+    gap: 35px;
+}
+
+
+.coordinates div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.coordinates span {
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+.coordinates strong {
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   CHART GRID
+===================================================== */
+
+.area-chart-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+
+.area-chart-card {
+    background: white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 17px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.05);
+}
+
+
+.full-width {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+.chart-header {
+    margin-bottom: 10px;
+}
+
+
+.chart-header h3 {
+    margin: 0 0 5px;
+
+    font-size: 18px;
+}
+
+
+.chart-header p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+.no-chart-data {
+    height: 320px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #9ca3af;
+}
+
+
+/* =====================================================
+   INSIGHT
+===================================================== */
+
+.area-insight {
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 17px;
+
+    padding: 22px;
+
+    display: flex;
+
+    gap: 16px;
+}
+
+
+.insight-icon {
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: white;
+
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+
+.area-insight h3 {
+    margin: 0 0 8px;
+}
+
+
+.area-insight p {
+    margin: 6px 0;
+
+    color: #475569;
+
+    line-height: 1.6;
+}
+
+
+.area-insight small {
+    display: block;
+
+    margin-top: 12px;
+
+    color: #64748b;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   LOADING / ERROR / EMPTY
+===================================================== */
+
+.area-loading,
+.area-error,
+.area-empty {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+
+.area-error {
+    color: #b91c1c;
+
+    background: #fef2f2;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .area-stat-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .area-chart-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .area-selector-card {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .area-selector-card select {
+        width: 100%;
+    }
+
+
+    .area-stat-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .area-location-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .coordinates {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .area-insight {
+        flex-direction: column;
+    }
+
+}

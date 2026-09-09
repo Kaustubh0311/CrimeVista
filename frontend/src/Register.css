@@ -1,0 +1,242 @@
+.register-page {
+    min-height: 100vh;
+    background: #050505;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.register-background {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(150, 0, 0, 0.20),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(255, 0, 0, 0.10),
+            transparent 30%
+        );
+    pointer-events: none;
+}
+
+.register-header {
+    height: 80px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    z-index: 2;
+}
+
+.brand-small {
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.brand-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ff2020;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.system-status {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #aaa;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: #3cff75;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.register-container {
+    min-height: calc(100vh - 80px);
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 80px;
+    align-items: center;
+    padding: 50px 8%;
+    position: relative;
+    z-index: 1;
+}
+
+.register-intro h1 {
+    font-size: clamp(50px, 7vw, 90px);
+    line-height: 0.9;
+    margin: 25px 0;
+}
+
+.register-intro h1 span {
+    display: block;
+    color: #ff3030;
+}
+
+.classification {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #ff3030;
+}
+
+.register-title {
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.register-description {
+    max-width: 550px;
+    color: #999;
+    line-height: 1.8;
+}
+
+.role-info {
+    margin-top: 40px;
+    display: flex;
+    gap: 30px;
+}
+
+.role-info div {
+    color: #aaa;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+.role-info span {
+    color: #ff3030;
+    margin-right: 8px;
+}
+
+.register-card {
+    background: rgba(15,15,15,0.94);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 35px;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+}
+
+.register-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.security-icon {
+    color: #ff3030;
+    font-size: 28px;
+}
+
+.register-label {
+    font-size: 11px;
+    color: #ff3030;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.register-card h2 {
+    margin: 5px 0 0;
+}
+
+.divider {
+    margin: 25px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 15px;
+}
+
+.divider span {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #777;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    box-sizing: border-box;
+    background: #090909;
+    border: 1px solid #292929;
+    color: white;
+    padding: 14px;
+    outline: none;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #ff3030;
+}
+
+.input-group select option {
+    background: #111;
+}
+
+.register-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: #d71920;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background: #ff2525;
+}
+
+.register-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.register-error {
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(255,0,0,0.08);
+    border: 1px solid rgba(255,0,0,0.3);
+    color: #ff6b6b;
+    font-size: 13px;
+}
+
+.register-error span {
+    margin-right: 8px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 22px;
+    color: #777;
+    font-size: 13px;
+}
+
+.login-link button {
+    background: none;
+    border: none;
+    color: #ff3030;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}

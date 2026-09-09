@@ -1,0 +1,749 @@
+.crime-reports {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+/* =====================================================
+   FILTER CARD
+===================================================== */
+
+.reports-filter-card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.05);
+}
+
+
+.report-filter-title h2 {
+    margin: 0 0 5px;
+
+    font-size: 20px;
+}
+
+
+.report-filter-title p {
+    margin: 0 0 20px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+.report-filters {
+    display: grid;
+
+    grid-template-columns:
+        1.4fr
+        1fr
+        1fr
+        auto;
+
+    gap: 15px;
+
+    align-items: end;
+}
+
+
+.report-filter {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.report-filter label {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+.report-filter select,
+.report-filter input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 9px;
+
+    background: white;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.report-filter select:focus,
+.report-filter input:focus {
+    border-color: #111827;
+}
+
+
+.report-reset {
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #f3f4f6;
+
+    color: #374151;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.report-reset:hover {
+    background: #e5e7eb;
+}
+
+
+/* =====================================================
+   REPORT DOCUMENT
+===================================================== */
+
+.report-document {
+    background: white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =====================================================
+   REPORT HEADER
+===================================================== */
+
+.report-header {
+    display: grid;
+
+    grid-template-columns:
+        80px
+        1fr
+        150px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 25px;
+
+    border-bottom:
+        2px solid #111827;
+}
+
+
+.report-logo {
+    width: 62px;
+
+    height: 62px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+.report-title h1 {
+    margin: 0;
+
+    font-size: 28px;
+}
+
+
+.report-title h2 {
+    margin: 3px 0;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+
+.report-title p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+.report-location {
+    text-align: right;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+/* =====================================================
+   META
+===================================================== */
+
+.report-meta {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    padding: 20px 0;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.report-meta div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.report-meta span {
+    font-size: 12px;
+
+    color: #9ca3af;
+}
+
+
+.report-meta strong {
+    font-size: 14px;
+
+    color: #111827;
+}
+
+
+/* =====================================================
+   REPORT SECTION
+===================================================== */
+
+.report-section {
+    margin-top: 28px;
+}
+
+
+.report-section-title {
+    margin-bottom: 15px;
+}
+
+
+.report-section-title h2 {
+    margin: 0 0 4px;
+
+    font-size: 19px;
+}
+
+
+.report-section-title p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   SUMMARY CARDS
+===================================================== */
+
+.report-summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.report-summary-card {
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 18px;
+}
+
+
+.report-summary-card span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    margin-bottom: 7px;
+}
+
+
+.report-summary-card strong {
+    font-size: 25px;
+
+    color: #111827;
+}
+
+
+/* =====================================================
+   FINDINGS
+===================================================== */
+
+.findings-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+
+.finding-card {
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    background: white;
+}
+
+
+.finding-card span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    margin-bottom: 8px;
+}
+
+
+.finding-card strong {
+    font-size: 17px;
+
+    color: #111827;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.report-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 12px;
+}
+
+
+.report-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+}
+
+
+.report-table th {
+    background: #f8fafc;
+
+    color: #374151;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    padding: 13px 15px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.report-table td {
+    padding: 12px 15px;
+
+    border-bottom:
+        1px solid #f1f5f9;
+
+    color: #475569;
+}
+
+
+.report-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.report-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* =====================================================
+   DISCLAIMER
+===================================================== */
+
+.report-disclaimer {
+    margin-top: 30px;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+}
+
+
+.report-disclaimer strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #374151;
+}
+
+
+.report-disclaimer p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.report-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 25px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid #e5e7eb;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.report-actions {
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+.generate-report-button {
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 13px 22px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+.generate-report-button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   LOADING / ERROR
+===================================================== */
+
+.reports-loading,
+.reports-error {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+
+.reports-error {
+    background: #fef2f2;
+
+    color: #b91c1c;
+}
+
+
+/* =====================================================
+   EMPTY DATA
+===================================================== */
+
+.no-report-data {
+    padding: 25px;
+
+    text-align: center;
+
+    color: #9ca3af;
+
+    background: #f8fafc;
+
+    border-radius: 10px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .report-filters {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .report-reset {
+        width: 100%;
+    }
+
+
+    .report-summary-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .report-header {
+        grid-template-columns:
+            70px 1fr;
+    }
+
+
+    .report-location {
+        grid-column: 2;
+
+        text-align: left;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .reports-filter-card,
+    .report-document {
+        padding: 18px;
+    }
+
+
+    .report-filters {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .report-summary-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .findings-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .report-meta {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .report-footer {
+        flex-direction: column;
+    }
+
+}
+
+
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
+@media print {
+
+    body {
+        background: white !important;
+    }
+
+
+    .user-sidebar,
+    .user-header,
+    .reports-filter-card,
+    .report-actions,
+    .page-heading {
+        display: none !important;
+    }
+
+
+    .user-main {
+        width: 100% !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+    }
+
+
+    .user-content {
+        padding: 0 !important;
+    }
+
+
+    .crime-reports {
+        display: block;
+    }
+
+
+    .report-document {
+        box-shadow: none;
+
+        border: none;
+
+        border-radius: 0;
+
+        padding: 0;
+    }
+
+
+    .report-table-wrapper {
+        overflow: visible;
+    }
+
+
+    .report-table {
+        page-break-inside: auto;
+    }
+
+
+    .report-table tr {
+        page-break-inside: avoid;
+
+        page-break-after: auto;
+    }
+
+
+    .report-section {
+        page-break-inside: avoid;
+    }
+
+
+    .report-header {
+        page-break-inside: avoid;
+    }
+
+
+    .report-disclaimer {
+        page-break-inside: avoid;
+    }
+
+}

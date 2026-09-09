@@ -301,3 +301,53 @@ def get_nagpur_crimes(
         for crime in crimes
 
     ]
+@router.get("/locations")
+def get_crime_locations(
+
+    current_user: User = Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+
+):
+
+    results = (
+
+        db.query(
+            CrimeRecord.location
+        )
+
+        .filter(
+            CrimeRecord.location
+            .isnot(None)
+        )
+
+        .distinct()
+
+        .order_by(
+            CrimeRecord.location
+        )
+
+        .all()
+
+    )
+
+
+    locations = [
+
+        location[0]
+
+        for location in results
+
+        if location[0]
+
+    ]
+
+
+    return {
+        "locations":
+            locations
+    }

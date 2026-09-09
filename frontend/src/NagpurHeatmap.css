@@ -1,134 +1,433 @@
-.heatmap-container {
-
-    margin-top: 30px;
-
-    background: #0b0b0b;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-}
-
-
-.heatmap-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 25px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.08);
-
-}
-
-
-.heatmap-header span {
-
-    color: #a00000;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-}
-
-
-.heatmap-header h2 {
-
-    margin:
-        8px 0;
-
-    font-size: 22px;
-
-}
-
-
-.heatmap-header p {
-
-    margin: 0;
-
-    color: #777;
-
-    font-size: 12px;
-
-}
-
-
-.heatmap-total {
-
-    text-align: right;
-
-}
-
-
-.heatmap-total strong {
-
-    display: block;
-
-    color: #d00000;
-
-    font-size: 30px;
-
-}
-
-
-.heatmap-total small {
-
-    color: #666;
-
-    font-size: 8px;
-
-    letter-spacing: 2px;
-
-}
-
-
-.nagpur-heatmap {
-
+.hotspot-page {
     width: 100%;
-
-    height: 600px;
-
 }
 
+/* ================= FILTERS ================= */
 
-.heatmap-legend {
-
+.hotspot-filter-bar {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    padding: 16px;
     display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 15px 25px;
-
-    color: #777;
-
-    font-size: 8px;
-
-    letter-spacing: 2px;
-
+    align-items: end;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
 }
 
+.hotspot-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
 
-.legend-gradient {
+.hotspot-filter label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6b7280;
+}
 
-    width: 180px;
+.hotspot-filter select,
+.hotspot-filter input {
+    height: 37px;
+    min-width: 165px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 0 10px;
+    background: white;
+    font-size: 12px;
+}
 
-    height: 10px;
+.hotspot-filter select:focus,
+.hotspot-filter input:focus {
+    outline: none;
+    border-color: #dc2626;
+}
 
-    background:
-        linear-gradient(
-            to right,
-            #00ff00,
-            #ffff00,
-            #ff0000
-        );
+.hotspot-reset {
+    height: 37px;
+    padding: 0 17px;
+    border: none;
+    border-radius: 6px;
+    background: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
 
+.hotspot-reset:hover {
+    background: #374151;
+}
+
+/* ================= STATS ================= */
+
+.hotspot-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.hotspot-stat-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hotspot-stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px;
+    background: #fef2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
+
+.hotspot-stat-card span {
+    display: block;
+    font-size: 10px;
+    color: #6b7280;
+}
+
+.hotspot-stat-card strong {
+    display: block;
+    font-size: 22px;
+    margin-top: 3px;
+}
+
+/* ================= MAIN ================= */
+
+.hotspot-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 370px;
+    gap: 16px;
+}
+
+.hotspot-map-card,
+.hotspot-ranking-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    overflow: hidden;
+}
+
+.hotspot-card-header {
+    padding: 17px 18px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.hotspot-card-header h2 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.hotspot-card-header p {
+    margin: 5px 0 0;
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+/* ================= LEGEND ================= */
+
+.map-legend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    color: #6b7280;
+}
+
+.map-legend > div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.high-dot {
+    background: #dc2626;
+}
+
+.medium-dot {
+    background: #f59e0b;
+}
+
+.low-dot {
+    background: #2563eb;
+}
+
+/* ================= MAP ================= */
+
+.hotspot-map-container {
+    height: 570px;
+}
+
+.hotspot-map {
+    width: 100%;
+    height: 100%;
+}
+
+.hotspot-loading {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f9fafb;
+    color: #6b7280;
+}
+
+.loading-spinner {
+    width: 35px;
+    height: 35px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #dc2626;
+    border-radius: 50%;
+    animation: hotspot-spin 0.8s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes hotspot-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ================= RANKING ================= */
+
+.ranking-list {
+    padding: 8px 17px 15px;
+    max-height: 570px;
+    overflow-y: auto;
+}
+
+.ranking-item {
+    display: flex;
+    gap: 11px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.rank-number {
+    width: 27px;
+    height: 27px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.rank-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.rank-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+}
+
+.rank-top strong {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.intensity-badge {
+    flex-shrink: 0;
+    font-size: 8px;
+    padding: 4px 7px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.intensity-badge.high {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.intensity-badge.medium {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.intensity-badge.low {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.rank-bar {
+    height: 5px;
+    background: #f3f4f6;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 8px 0 5px;
+}
+
+.rank-bar-fill {
+    height: 100%;
+    background: #dc2626;
+    border-radius: 5px;
+}
+
+.rank-bottom {
+    display: flex;
+    justify-content: space-between;
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+/* ================= POPUP ================= */
+
+.hotspot-popup h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.hotspot-popup p {
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+/* ================= EMPTY ================= */
+
+.empty-hotspots {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.empty-hotspots > div {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.empty-hotspots h3 {
+    margin: 0 0 5px;
+}
+
+.empty-hotspots p {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+/* ================= ERROR ================= */
+
+.hotspot-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    padding: 11px;
+    border-radius: 7px;
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+
+/* ================= EXPLANATION ================= */
+
+.hotspot-explanation {
+    margin-top: 16px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #dc2626;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    gap: 12px;
+}
+
+.explanation-icon {
+    font-size: 22px;
+}
+
+.hotspot-explanation strong {
+    font-size: 11px;
+}
+
+.hotspot-explanation p {
+    color: #6b7280;
+    font-size: 10px;
+    line-height: 1.6;
+    margin: 5px 0 0;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+
+    .hotspot-main {
+        grid-template-columns: 1fr;
+    }
+
+    .hotspot-ranking-card {
+        width: 100%;
+    }
+
+    .ranking-list {
+        max-height: none;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .hotspot-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .hotspot-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hotspot-filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hotspot-filter select,
+    .hotspot-filter input,
+    .hotspot-reset {
+        width: 100%;
+    }
+
+    .hotspot-card-header {
+        flex-direction: column;
+    }
+
+    .map-legend {
+        flex-wrap: wrap;
+    }
+
+    .hotspot-map-container {
+        height: 420px;
+    }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import CrimePrediction from "./CrimePrediction.jsx";
 import {
     BarChart,
     Bar,
@@ -629,6 +629,19 @@ function Dashboard({ token, onLogout }) {
             <section className="heatmap-section">
 
                 <NagpurHeatmap
+                    token={token}
+                />
+
+            </section>
+
+
+            {/* =====================================
+                PHASE 8 — NAGPUR CRIME RISK PREDICTION
+               ===================================== */}
+
+            <section className="prediction-section">
+
+                <CrimePrediction
                     token={token}
                 />
 

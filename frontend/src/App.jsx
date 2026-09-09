@@ -1,29 +1,79 @@
 import { useState } from "react";
 
 import LandingPage from "./LandingPage";
-import Login from "./Login";
+import Login from "./login";
+import Register from "./Register";
 import Dashboard from "./Dashboard";
+import UserDashboard from "./UserDashboard";
 
 
 function App() {
 
     const [token, setToken] = useState(
-        localStorage.getItem(
-            "access_token"
-        )
+        localStorage.getItem("access_token")
+    );
+
+    const [user, setUser] = useState(null);
+
+    const [page, setPage] = useState(
+        token ? "loading" : "landing"
     );
 
 
-    const [showLanding, setShowLanding] =
-        useState(true);
+    const loadUser = async (accessToken) => {
+
+        try {
+
+            const response = await fetch(
+                "http://127.0.0.1:8000/auth/me",
+                {
+                    headers: {
+                        Authorization:
+                            `Bearer ${accessToken}`
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Unable to load user");
+            }
+
+            const data = await response.json();
+
+            setUser(data);
+
+            if (data.role === "user") {
+                setPage("user");
+            } else {
+                setPage("dashboard");
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            localStorage.removeItem("access_token");
+
+            setToken(null);
+            setUser(null);
+            setPage("landing");
+        }
+    };
 
 
-    const handleLogin = (newToken) => {
+    const handleLogin = async (newToken) => {
 
         setToken(newToken);
 
-        setShowLanding(false);
+        await loadUser(newToken);
+    };
 
+
+    const handleRegister = async (newToken) => {
+
+        setToken(newToken);
+
+        await loadUser(newToken);
     };
 
 
@@ -34,50 +84,32 @@ function App() {
         );
 
         setToken(null);
-
-        setShowLanding(true);
-
+        setUser(null);
+        setPage("landing");
     };
 
 
-    /*
-     * =====================================
-     * LANDING PAGE
-     * =====================================
-     */
-
-    if (!token && showLanding) {
+    if (page === "landing") {
 
         return (
 
             <LandingPage
 
                 onLogin={() => {
-
-                    setShowLanding(false);
-
+                    setPage("login");
                 }}
 
                 onRegister={() => {
-
-                    setShowLanding(false);
-
+                    setPage("register");
                 }}
 
             />
 
         );
-
     }
 
 
-    /*
-     * =====================================
-     * LOGIN PAGE
-     * =====================================
-     */
-
-    if (!token) {
+    if (page === "login") {
 
         return (
 
@@ -86,15 +118,51 @@ function App() {
             />
 
         );
-
     }
 
 
-    /*
-     * =====================================
-     * DASHBOARD
-     * =====================================
-     */
+    if (page === "register") {
+
+        return (
+
+            <Register
+                onRegister={handleRegister}
+
+                onBackToLogin={() => {
+                    setPage("login");
+                }}
+
+            />
+
+        );
+    }
+
+
+    if (page === "loading") {
+
+        loadUser(token);
+
+        return (
+            <div>
+                Loading CrimeVista...
+            </div>
+        );
+    }
+
+
+    if (page === "user") {
+
+        return (
+
+            <UserDashboard
+                token={token}
+                user={user}
+                onLogout={handleLogout}
+            />
+
+        );
+    }
+
 
     return (
 
@@ -107,7 +175,6 @@ function App() {
         />
 
     );
-
 }
 
 

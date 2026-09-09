@@ -39,6 +39,10 @@ def register(
     db: Session = Depends(get_db)
 ):
 
+    # -----------------------------------------------------
+    # CHECK WHETHER EMAIL ALREADY EXISTS
+    # -----------------------------------------------------
+
     existing_user = (
         db.query(User)
         .filter(
@@ -54,19 +58,37 @@ def register(
             detail="Email already registered"
         )
 
-    if request.role not in [
-        "admin",
-        "officer"
-    ]:
+
+    # -----------------------------------------------------
+    # VALIDATE ROLE
+    # -----------------------------------------------------
+
+    allowed_roles = [
+        "user",
+        "officer",
+        "admin"
+    ]
+
+    if request.role not in allowed_roles:
 
         raise HTTPException(
             status_code=400,
-            detail="Invalid role"
+            detail="Invalid role. Choose user, officer, or admin."
         )
+
+
+    # -----------------------------------------------------
+    # HASH PASSWORD
+    # -----------------------------------------------------
 
     hashed_password = hash_password(
         request.password
     )
+
+
+    # -----------------------------------------------------
+    # CREATE USER
+    # -----------------------------------------------------
 
     user = User(
         name=request.name,
@@ -76,16 +98,23 @@ def register(
         is_active=True
     )
 
+
     db.add(user)
 
     db.commit()
 
     db.refresh(user)
 
+
+    # -----------------------------------------------------
+    # CREATE JWT TOKEN
+    # -----------------------------------------------------
+
     token = create_access_token(
         user_id=user.id,
         role=user.role
     )
+
 
     return {
         "access_token": token,
@@ -106,6 +135,10 @@ def login(
     db: Session = Depends(get_db)
 ):
 
+    # -----------------------------------------------------
+    # FIND USER
+    # -----------------------------------------------------
+
     user = (
         db.query(User)
         .filter(
@@ -114,6 +147,11 @@ def login(
         .first()
     )
 
+
+    # -----------------------------------------------------
+    # USER NOT FOUND
+    # -----------------------------------------------------
+
     if user is None:
 
         raise HTTPException(
@@ -121,10 +159,16 @@ def login(
             detail="Invalid email or password"
         )
 
+
+    # -----------------------------------------------------
+    # VERIFY PASSWORD
+    # -----------------------------------------------------
+
     password_correct = verify_password(
         request.password,
         user.password_hash
     )
+
 
     if not password_correct:
 
@@ -133,6 +177,11 @@ def login(
             detail="Invalid email or password"
         )
 
+
+    # -----------------------------------------------------
+    # CHECK ACTIVE STATUS
+    # -----------------------------------------------------
+
     if not user.is_active:
 
         raise HTTPException(
@@ -140,10 +189,16 @@ def login(
             detail="User account is inactive"
         )
 
+
+    # -----------------------------------------------------
+    # CREATE LOGIN TOKEN
+    # -----------------------------------------------------
+
     token = create_access_token(
         user_id=user.id,
         role=user.role
     )
+
 
     return {
         "access_token": token,

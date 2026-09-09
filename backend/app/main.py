@@ -8,7 +8,9 @@ from backend.app.routes.admin import router as admin_router
 from backend.app.routes.crime_upload import (
     router as crime_upload_router
 )
-
+from backend.app.routes.predictions import (
+    router as prediction_router
+)
 app = FastAPI(
     title="CrimeVista API",
     description="AI-powered geospatial crime prediction platform",
@@ -44,7 +46,9 @@ app.include_router(
 app.include_router(
     crime_upload_router
 )
-
+app.include_router(
+    prediction_router
+)
 
 
 @app.get("/")

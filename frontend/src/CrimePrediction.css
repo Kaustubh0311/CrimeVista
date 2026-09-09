@@ -1,0 +1,276 @@
+.prediction-section {
+
+    margin-top: 30px;
+
+    padding: 30px;
+
+    background: #0b0b0b;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+}
+
+
+.prediction-header {
+
+    padding-bottom: 25px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.07);
+
+}
+
+
+.prediction-header span {
+
+    color: #a00000;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.prediction-header h2 {
+
+    margin: 8px 0;
+
+    font-size: 23px;
+
+}
+
+
+.prediction-header p {
+
+    margin: 0;
+
+    color: #777;
+
+    font-size: 12px;
+
+}
+
+
+.prediction-control {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 2fr auto;
+
+    align-items: end;
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+}
+
+
+.prediction-control label {
+
+    color: #777;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.prediction-control select {
+
+    height: 46px;
+
+    padding: 0 15px;
+
+    background: #080808;
+
+    border:
+        1px solid #333;
+
+    color: white;
+
+    outline: none;
+
+}
+
+
+.prediction-control select:focus {
+
+    border-color: #900000;
+
+}
+
+
+.prediction-control button {
+
+    height: 46px;
+
+    padding: 0 24px;
+
+    border: none;
+
+    background: #900000;
+
+    color: white;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+
+    font-size: 9px;
+
+}
+
+
+.prediction-control button:hover {
+
+    background: #b00000;
+
+}
+
+
+.prediction-control button:disabled {
+
+    opacity: 0.5;
+
+    cursor: wait;
+
+}
+
+
+.prediction-results {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+}
+
+
+.prediction-card {
+
+    padding: 22px;
+
+    background: #080808;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.07);
+
+}
+
+
+.prediction-card span {
+
+    display: block;
+
+    color: #666;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.prediction-card strong {
+
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: 20px;
+
+}
+
+
+.risk-card.low strong {
+
+    color: #6aa86a;
+
+}
+
+
+.risk-card.medium strong {
+
+    color: #d2a742;
+
+}
+
+
+.risk-card.high strong {
+
+    color: #d00000;
+
+}
+
+
+.prediction-error {
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    background:
+        rgba(150,0,0,0.1);
+
+    border-left:
+        2px solid #b00000;
+
+    color: #d77;
+
+}
+
+
+.prediction-note {
+
+    margin-top: 25px;
+
+    color: #555;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+}
+
+
+@media (max-width: 1000px) {
+
+    .prediction-results {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .prediction-control {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .prediction-results {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

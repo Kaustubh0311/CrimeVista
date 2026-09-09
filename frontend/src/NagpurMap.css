@@ -1,162 +1,357 @@
-.nagpur-map-wrapper {
-
-    margin-top: 30px;
-
-    background: #0b0b0b;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.08);
-
+.nagpur-map-page {
+    width: 100%;
 }
 
+/* ================= FILTER BAR ================= */
 
-.map-heading {
-
+.map-toolbar {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    padding: 16px;
     display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 22px 25px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.07);
-
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
-
-.map-heading span {
-
-    color: #a00000;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
+.map-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-
-.map-heading h2 {
-
-    margin: 7px 0 0;
-
-    font-size: 20px;
-
+.map-filter label {
+    font-size: 10px;
+    color: #6b7280;
+    font-weight: 700;
 }
 
-
-.crime-count {
-
-    color: #d00000;
-
-    font-size: 25px;
-
-    font-weight: bold;
-
-    text-align: right;
-
+.map-filter select,
+.map-filter input {
+    height: 37px;
+    min-width: 165px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 0 10px;
+    font-size: 12px;
+    background: white;
+    color: #374151;
 }
 
+.map-filter select:focus,
+.map-filter input:focus {
+    outline: none;
+    border-color: #dc2626;
+}
 
-.crime-count small {
+.reset-map-btn {
+    height: 37px;
+    border: none;
+    border-radius: 6px;
+    padding: 0 16px;
+    background: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
 
+.reset-map-btn:hover {
+    background: #374151;
+}
+
+/* ================= SUMMARY ================= */
+
+.map-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.map-summary > div {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    padding: 13px 17px;
+}
+
+.map-summary strong {
     display: block;
-
-    margin-top: 3px;
-
-    color: #666;
-
-    font-size: 7px;
-
-    letter-spacing: 2px;
-
+    font-size: 21px;
+    color: #111827;
 }
 
+.map-summary span {
+    display: block;
+    color: #6b7280;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+/* ================= MAP LAYOUT ================= */
+
+.map-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 15px;
+}
+
+.map-container-wrapper {
+    height: 560px;
+    border-radius: 11px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    background: #e5e7eb;
+}
 
 .nagpur-map {
-
+    height: 100%;
     width: 100%;
-
-    height: 600px;
-
 }
 
+/* ================= LOADING ================= */
 
-.map-message {
-
-    min-height: 400px;
-
+.map-loading {
+    height: 100%;
+    background: #f9fafb;
     display: flex;
-
-    align-items: center;
-
+    flex-direction: column;
     justify-content: center;
-
-    background: #0b0b0b;
-
-    color: #777;
-
+    align-items: center;
+    color: #6b7280;
 }
 
-
-.crime-marker {
-
-    background: transparent;
-
-    border: none;
-
-}
-
-
-.crime-marker-dot {
-
-    width: 16px;
-
-    height: 16px;
-
+.loading-spinner {
+    width: 35px;
+    height: 35px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #dc2626;
     border-radius: 50%;
-
-    background: #c00000;
-
-    border:
-        2px solid
-        #ffffff;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(190,0,0,0.25),
-
-        0 0 15px
-        rgba(200,0,0,0.8);
-
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
 }
 
-
-.crime-popup {
-
-    min-width: 180px;
-
-    color: #222;
-
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
+/* ================= DETAILS ================= */
+
+.crime-details-panel {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    overflow: hidden;
+    height: 560px;
+}
+
+.details-header {
+    padding: 17px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.details-header h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.no-selection {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+}
+
+.no-selection > div {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #fef2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    margin-bottom: 13px;
+}
+
+.no-selection h4 {
+    margin: 0 0 7px;
+}
+
+.no-selection p {
+    color: #9ca3af;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ================= SELECTED CRIME ================= */
+
+.selected-crime {
+    padding: 18px;
+}
+
+.crime-type-badge {
+    display: inline-block;
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+
+.selected-crime h2 {
+    margin: 0 0 18px;
+    font-size: 20px;
+    color: #111827;
+}
+
+.detail-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.detail-item span {
+    display: block;
+    color: #9ca3af;
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+
+.detail-item strong {
+    font-size: 12px;
+    color: #374151;
+}
+
+.description-box {
+    background: #f9fafb;
+    border-radius: 7px;
+    padding: 12px;
+    margin-top: 15px;
+}
+
+.description-box span {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.description-box p {
+    color: #6b7280;
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 6px 0 0;
+}
+
+.close-details {
+    width: 100%;
+    margin-top: 17px;
+    padding: 9px;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.close-details:hover {
+    background: #f9fafb;
+}
+
+/* ================= POPUP ================= */
 
 .crime-popup h3 {
-
-    margin-top: 0;
-
-    color: #900000;
-
+    margin: 0 0 9px;
+    font-size: 14px;
 }
 
-
 .crime-popup p {
+    margin: 5px 0;
+    font-size: 11px;
+    line-height: 1.4;
+}
 
-    font-size: 12px;
+/* ================= ERROR ================= */
 
-    line-height: 1.5;
+.map-error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    border-radius: 7px;
+    padding: 11px;
+    font-size: 11px;
+    margin-bottom: 15px;
+}
 
+/* ================= DISCLAIMER ================= */
+
+.map-disclaimer {
+    margin-top: 15px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #dc2626;
+    border-radius: 8px;
+    padding: 13px 15px;
+}
+
+.map-disclaimer strong {
+    font-size: 11px;
+}
+
+.map-disclaimer p {
+    color: #6b7280;
+    font-size: 10px;
+    line-height: 1.6;
+    margin: 5px 0 0;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 950px) {
+
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .crime-details-panel {
+        height: auto;
+        min-height: 300px;
+    }
+
+    .map-container-wrapper {
+        height: 500px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .map-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .map-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .map-filter select,
+    .map-filter input {
+        width: 100%;
+    }
+
+    .reset-map-btn {
+        width: 100%;
+    }
+
+    .map-container-wrapper {
+        height: 420px;
+    }
 }

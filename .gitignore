@@ -19,3 +19,6 @@ dist/
 
 # Log files
 *.log
+# Generated ML files
+ml/data/training_data.csv
+ml/models/*.joblib
