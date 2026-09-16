@@ -8,32 +8,128 @@ from sqlalchemy.orm import Session
 from backend.app.models.crime import CrimeRecord
 
 
+# =========================================================
+# REQUIRED CSV COLUMNS
+# =========================================================
+
 REQUIRED_COLUMNS = {
     "crime_type",
     "location",
     "latitude",
     "longitude",
-    "crime_date",
-    "description"
+    "crime_date"
 }
 
+
+# =========================================================
+# NAGPUR GEOGRAPHIC BOUNDARY
+# =========================================================
+# Approximate Nagpur city boundary.
+# Records outside this area will not be uploaded.
+
+NAGPUR_LAT_MIN = 20.95
+NAGPUR_LAT_MAX = 21.35
+
+NAGPUR_LON_MIN = 78.85
+NAGPUR_LON_MAX = 79.35
+
+
+# =========================================================
+# DATE PARSER
+# =========================================================
+
+def parse_crime_date(date_value):
+
+    if date_value is None:
+        raise ValueError(
+            "crime_date is missing"
+        )
+
+    date_value = str(
+        date_value
+    ).strip()
+
+    if not date_value:
+        raise ValueError(
+            "crime_date is empty"
+        )
+
+    supported_formats = [
+
+        "%Y-%m-%d",
+
+        "%d-%m-%Y",
+
+        "%d/%m/%Y",
+
+        "%Y/%m/%d",
+
+        "%m/%d/%Y",
+
+        "%d-%b-%Y",
+
+        "%d-%B-%Y"
+
+    ]
+
+    for date_format in supported_formats:
+
+        try:
+
+            return datetime.strptime(
+                date_value,
+                date_format
+            )
+
+        except ValueError:
+
+            continue
+
+
+    raise ValueError(
+        f"Invalid crime_date format: {date_value}"
+    )
+
+
+# =========================================================
+# PROCESS CRIME CSV
+# =========================================================
 
 def process_crime_csv(
     file_content: bytes,
     db: Session
 ):
 
-    decoded_content = file_content.decode(
-        "utf-8-sig"
-    )
+    # =====================================================
+    # DECODE CSV
+    # =====================================================
+
+    try:
+
+        decoded_content = file_content.decode(
+            "utf-8-sig"
+        )
+
+    except UnicodeDecodeError:
+
+        raise ValueError(
+            "CSV file must be UTF-8 encoded"
+        )
+
 
     csv_file = io.StringIO(
         decoded_content
     )
 
+
+    # =====================================================
+    # READ CSV
+    # =====================================================
+
     reader = csv.DictReader(
         csv_file
     )
+
 
     if reader.fieldnames is None:
 
@@ -42,26 +138,61 @@ def process_crime_csv(
         )
 
 
-    csv_columns = {
-        column.strip()
+    # =====================================================
+    # CLEAN COLUMN NAMES
+    # =====================================================
+
+    reader.fieldnames = [
+
+        column.strip().lower()
+
+        if column
+
+        else column
+
         for column in reader.fieldnames
+
+    ]
+
+
+    csv_columns = {
+
+        column.strip().lower()
+
+        for column in reader.fieldnames
+
+        if column
+
     }
 
 
+    # =====================================================
+    # CHECK REQUIRED COLUMNS
+    # =====================================================
+
     missing_columns = (
-        REQUIRED_COLUMNS - csv_columns
+
+        REQUIRED_COLUMNS
+        - csv_columns
+
     )
 
 
     if missing_columns:
 
         raise ValueError(
+
             "Missing columns: "
             + ", ".join(
                 sorted(missing_columns)
             )
+
         )
 
+
+    # =====================================================
+    # COUNTERS
+    # =====================================================
 
     inserted_count = 0
 
@@ -70,6 +201,10 @@ def process_crime_csv(
     errors = []
 
 
+    # =====================================================
+    # PROCESS EACH ROW
+    # =====================================================
+
     for row_number, row in enumerate(
         reader,
         start=2
@@ -77,50 +212,54 @@ def process_crime_csv(
 
         try:
 
-            # =========================================
-            # READ CSV VALUES
-            # =========================================
+            # =============================================
+            # CLEAN ROW KEYS
+            # =============================================
 
-            crime_type = (
-                row["crime_type"]
-                .strip()
-            )
+            row = {
 
-            location = (
-                row["location"]
-                .strip()
-            )
+                key.strip().lower(): value
 
-            description = (
-                row["description"]
-                .strip()
-            )
+                for key, value in row.items()
+
+                if key is not None
+
+            }
 
 
-            latitude = float(
-                row["latitude"]
-            )
+            # =============================================
+            # CRIME TYPE
+            # =============================================
 
-            longitude = float(
-                row["longitude"]
-            )
+            crime_type = str(
 
+                row.get(
+                    "crime_type",
+                    ""
+                )
 
-            crime_date = datetime.strptime(
-                row["crime_date"].strip(),
-                "%Y-%m-%d"
-            )
+            ).strip()
 
-
-            # =========================================
-            # BASIC VALIDATION
-            # =========================================
 
             if not crime_type:
 
                 raise ValueError(
                     "crime_type is empty"
                 )
+
+
+            # =============================================
+            # LOCATION
+            # =============================================
+
+            location = str(
+
+                row.get(
+                    "location",
+                    ""
+                )
+
+            ).strip()
 
 
             if not location:
@@ -130,21 +269,79 @@ def process_crime_csv(
                 )
 
 
-            # =========================================
-            # NAGPUR-ONLY VALIDATION
-            # =========================================
+            # =============================================
+            # DESCRIPTION
+            # =============================================
+            # OPTIONAL FIELD
+            #
+            # If CSV does not contain description,
+            # an empty description is stored.
 
-            if "nagpur" not in location.lower():
+            description = str(
+
+                row.get(
+                    "description",
+                    ""
+                )
+
+            ).strip()
+
+
+            # =============================================
+            # LATITUDE
+            # =============================================
+
+            latitude_value = str(
+
+                row.get(
+                    "latitude",
+                    ""
+                )
+
+            ).strip()
+
+
+            if not latitude_value:
 
                 raise ValueError(
-                    "Only Nagpur crime records "
-                    "are allowed"
+                    "latitude is empty"
                 )
 
 
-            # =========================================
-            # LATITUDE VALIDATION
-            # =========================================
+            latitude = float(
+                latitude_value
+            )
+
+
+            # =============================================
+            # LONGITUDE
+            # =============================================
+
+            longitude_value = str(
+
+                row.get(
+                    "longitude",
+                    ""
+                )
+
+            ).strip()
+
+
+            if not longitude_value:
+
+                raise ValueError(
+                    "longitude is empty"
+                )
+
+
+            longitude = float(
+                longitude_value
+            )
+
+
+            # =============================================
+            # BASIC COORDINATE VALIDATION
+            # =============================================
 
             if not (
                 -90 <= latitude <= 90
@@ -155,10 +352,6 @@ def process_crime_csv(
                 )
 
 
-            # =========================================
-            # LONGITUDE VALIDATION
-            # =========================================
-
             if not (
                 -180 <= longitude <= 180
             ):
@@ -168,12 +361,54 @@ def process_crime_csv(
                 )
 
 
-            # =========================================
+            # =============================================
+            # NAGPUR-ONLY VALIDATION
+            # =============================================
+            # We use coordinates instead of checking
+            # whether the word "Nagpur" exists in location.
+
+            if not (
+
+                NAGPUR_LAT_MIN
+                <= latitude
+                <= NAGPUR_LAT_MAX
+
+                and
+
+                NAGPUR_LON_MIN
+                <= longitude
+                <= NAGPUR_LON_MAX
+
+            ):
+
+                raise ValueError(
+                    "Crime location is outside Nagpur"
+                )
+
+
+            # =============================================
+            # CRIME DATE
+            # =============================================
+
+            crime_date = parse_crime_date(
+
+                row.get(
+                    "crime_date"
+                )
+
+            )
+
+
+            # =============================================
             # CHECK DUPLICATE RECORD
-            # =========================================
+            # =============================================
 
             existing_record = (
-                db.query(CrimeRecord)
+
+                db.query(
+                    CrimeRecord
+                )
+
                 .filter(
 
                     CrimeRecord.crime_type
@@ -192,7 +427,9 @@ def process_crime_csv(
                     == crime_date
 
                 )
+
                 .first()
+
             )
 
 
@@ -203,9 +440,9 @@ def process_crime_csv(
                 continue
 
 
-            # =========================================
+            # =============================================
             # CREATE CRIME RECORD
-            # =========================================
+            # =============================================
 
             crime = CrimeRecord(
 
@@ -224,10 +461,16 @@ def process_crime_csv(
             )
 
 
-            db.add(crime)
+            db.add(
+                crime
+            )
 
             inserted_count += 1
 
+
+        # =============================================
+        # HANDLE INDIVIDUAL ROW ERROR
+        # =============================================
 
         except Exception as error:
 
@@ -240,25 +483,29 @@ def process_crime_csv(
             })
 
 
-    # =============================================
-    # SAVE DATA
-    # =============================================
+    # =====================================================
+    # SAVE DATABASE CHANGES
+    # =====================================================
 
     db.commit()
 
 
-    # =============================================
+    # =====================================================
     # RETURN RESULT
-    # =============================================
+    # =====================================================
 
     return {
 
-        "inserted": inserted_count,
+        "inserted":
+            inserted_count,
 
-        "skipped": skipped_count,
+        "skipped":
+            skipped_count,
 
-        "failed": len(errors),
+        "failed":
+            len(errors),
 
-        "errors": errors
+        "errors":
+            errors
 
     }
